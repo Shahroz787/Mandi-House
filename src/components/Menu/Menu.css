@@ -1,0 +1,18 @@
+.main-menu {
+  background-color: #03302d;
+  list-style-type: none;
+}
+.menu-item {
+    /* background-color: #03302d; */
+    border-radius: 5px;
+    margin: 0 10px;
+    text-align: center;
+    color: white;
+  }
+
+  @media (max-width: 768px){
+    .main-menu{
+        width: 88%;
+        margin-left: 6%;
+    }
+  }

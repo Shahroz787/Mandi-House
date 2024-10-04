@@ -1,0 +1,40 @@
+.header {
+  background-color: white;
+  height: 10%;
+}
+.phone{
+    
+    width: 20%;
+    height: 50%;
+    
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
+}
+.phone-a{
+    background-color: #03302d;
+    color: #e0af49;
+    border-color: #03302d;
+
+}
+.branch-phone-number {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  position: relative;
+  z-index: 999;
+}
+.btn-indolj-primary {
+  color: var(--foreground-color) !important;
+  background-color: var(--background-color) !important;
+  border-color: var(--background-color) !important;
+}
+
+@media (min-width: 768px) {
+  .ms-md-2 {
+    margin-left: 0.5rem !important;
+  }
+}
