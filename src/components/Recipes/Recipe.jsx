@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Recipe.css";
 import { useQuery } from "react-query";
 import { HiChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
