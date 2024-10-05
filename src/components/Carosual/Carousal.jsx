@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Carosual.css";
-
 const images = ["/images/arabic feest.webp", "/images/tradiiton.webp"];
 
 const Carousal = () => {
