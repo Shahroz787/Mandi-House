@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Recipe.css";
 import { useQuery } from "react-query";
 import { HiChat } from "react-icons/hi";
-import { Link } from "react-router-dom";
-import Item from "../../pages/item/Items";
+import RecipeDetails from "../RecipeDetails/RecipeDetails";
+import "./Recipe.css";
+import Items from "../../pages/item/Items";
 
 const fetchRecipes = async (search) => {
   const response = await fetch(
@@ -14,6 +14,9 @@ const fetchRecipes = async (search) => {
 
 const Recipe = () => {
   const [search, setSearch] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["recipes", search],
     queryFn: () => fetchRecipes(search),
@@ -21,12 +24,22 @@ const Recipe = () => {
   });
 
   if (isError)
-    return <h1 className="text-center my-20 text-3xl">something went wrong</h1>;
-  console.log("data>--", data);
+    return <h1 className="text-center my-20 text-3xl">Something went wrong</h1>;
+  console.log("data-->", data);
+
+  const handleRecipeClick = (recipe) => {
+    setSelectedRecipe(recipe);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedRecipe(null);
+  };
 
   return (
     <>
-      <Item />
+      <Items />
       <div className="container px-3 py-4 mx-auto">
         <h1 className="text-white text-center text-2xl sm:text-3xl sm:p-8 p-7 font-medium">
           Delicious Recipes
@@ -35,11 +48,8 @@ const Recipe = () => {
         <div className="relative w-full">
           <input
             type="text"
-            id="full-name"
-            name="full-name"
             placeholder="Search for item by title..."
-            className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-green-900
- rounded-full border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out pr-10" // note 'pr-10' for right padding
+            className="w-full bg-gray-600 bg-opacity-20 rounded-full border text-gray-100 py-1 px-3"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -51,34 +61,47 @@ const Recipe = () => {
         )}
 
         <div className="flex flex-wrap -m-4 mt-4">
-          {data?.recipes?.map((Recipe) => {
-            const { image, id, name, rating, cuisine } = Recipe;
+          {data?.recipes?.map((recipe) => {
+            const { image, id, name, rating, cuisine } = recipe;
             return (
-              <Link
+              <div
                 key={id}
-                className="lg:w-1/4 md:w-1/2 p-4 w-full no-underline"
-                to={`/${id}`}
+                className="cursor-pointer lg:w-1/4 md:w-1/2 p-4 w-full"
               >
-                <a className="block relative h-48 rounded overflow-hidden ">
+                <div className="recipe-item block relative h-auto rounded overflow-hidden bg-green-900">
+                  {/* Display the first image in the array */}
                   <img
-                    alt="ecommerce"
-                    className="rounded-lg object-cover object-center w-full h-full block"
+                    alt={name}
+                    className="rounded-lg object-cover w-full h-48"
                     src={image}
                   />
-                </a>
-                <div className="mt-4 ">
+
+                  {/* "View Details" Button */}
+                  <button
+                    className="view-details-btn absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-lime-800 text-white px-3 py-1 rounded-lg"
+                    onClick={() => handleRecipeClick(recipe)}
+                  >
+                    View Details
+                  </button>
+                </div>
+
+                <div className="mt-4 p-2">
                   <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                     {cuisine}
                   </h3>
-                  <h2 className="text-white title-font text-lg font-medium">
-                    {name}
-                  </h2>
+                  <h2 className="text-white text-lg font-medium">{name}</h2>
                   <p className="text-yellow-400">RATING {rating}</p>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
+
+        {showModal && selectedRecipe && (
+          <div className={`modal-overlay ${showModal ? "active" : ""}`}>
+            <RecipeDetails recipe={selectedRecipe} closeModal={closeModal} />
+          </div>
+        )}
       </div>
     </>
   );

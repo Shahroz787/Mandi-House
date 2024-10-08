@@ -11,10 +11,10 @@ const menu = [
   "Salad",
   "Blueberry",
   "Mutton",
-  "Grill"
+  "Grill",
 ];
 
-const Menu = () => {
+const MenuRecipeDetails = () => {
   const menuRef = useRef(null);
   const [isRightArrowDisabled, setIsRightArrowDisabled] = useState(false);
   const [isLeftArrowDisabled, setIsLeftArrowDisabled] = useState(true);
@@ -57,7 +57,9 @@ const Menu = () => {
     <div className="relative">
       {/* Left Arrow */}
       <button
-        className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full z-10 ${isLeftArrowDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full z-10 ${
+          isLeftArrowDisabled ? "opacity-50 cursor-not-allowed" : ""
+        }`}
         onClick={scrollLeft}
         disabled={isLeftArrowDisabled}
       >
@@ -81,7 +83,9 @@ const Menu = () => {
 
       {/* Right Arrow */}
       <button
-        className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full z-10 ${isRightArrowDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full z-10 ${
+          isRightArrowDisabled ? "opacity-50 cursor-not-allowed" : ""
+        }`}
         onClick={scrollRight}
         disabled={isRightArrowDisabled}
       >
@@ -91,4 +95,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MenuRecipeDetails;

@@ -1,18 +1,47 @@
 .main-menu {
+  display: flex;
+  justify-content: center; /* Centering items */
+  align-items: center;
+  width: 100%;
   background-color: #03302d;
   list-style-type: none;
+  padding: 10px; /* Padding for better appearance */
 }
-.menu-item {
-    /* background-color: #03302d; */
-    border-radius: 5px;
-    margin: 0 10px;
-    text-align: center;
-    color: white;
-  }
 
-  @media (max-width: 768px){
-    .main-menu{
-        width: 88%;
-        margin-left: 6%;
-    }
+.menu-item {
+  border-radius: 5px;
+  margin: 0 15px; /* Margin for spacing between items */
+  padding: 10px; /* Padding inside the menu item */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Slightly transparent background for better visibility */
+  transition: transform 0.3s; /* Animation for hover effect */
+}
+
+.menu-item:hover {
+  transform: scale(1.05); /* Slightly scale up on hover */
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5; /* Disable opacity */
+  cursor: not-allowed; /* Change cursor when disabled */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge, Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+@media (max-width: 768px) {
+  .main-menu {
+    width: 85%; /* Reduce width on smaller screens */
+    margin: 0 auto; /* Center align */
   }
+}
