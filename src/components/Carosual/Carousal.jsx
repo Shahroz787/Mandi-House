@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const images = ["/images/arabic feest.webp", "/images/tradiiton.webp"];
 
 const Carousal = () => {
